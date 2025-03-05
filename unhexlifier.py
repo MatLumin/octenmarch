@@ -1,8 +1,8 @@
 import binascii
 
 
-def do_it(data:str)->bytes:
-    return binascii.unhexlify(data.encode())
+def do_it(data:bytes)->bytes:
+    return binascii.unhexlify(data)
 
 
 if __name__ == "__main__":

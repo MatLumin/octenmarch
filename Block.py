@@ -5,23 +5,38 @@ import hashlib
 import dict_masher
 
 import unhexlifier
+import hexlifier
 
 import pow_validator
 
 class Block:
-    def __init__(self, data:str, index:int, previous_hash:str, pow:str):
+    def __init__(self, data:str, index:int, previous_hash:bytes, pow:bytes):
         self.data:str = data
-        self.index = index 
-        self.previous_hash = previous_hash
-        self.pow = pow 
+        self.index:int = index 
+        self.previous_hash:bytes = previous_hash
+        self.pow:bytes = pow 
+
+    def __eq__(self, other)->bool:
+        output:bool = True
+        output &= self.data == other.data
+        output &= self.index == other.index
+        output &= self.previous_hash == other.previous_hash
+        output &= self.pow == other.pow
+        return output
+    
+    def __str__(self)->str:
+        return f"<Block d:{self.data} i:{self.index} ph:{self.previous_hash} pow:{self.previous_hash}"
+    
+    def __repr__(self):return str(self)
 
     def dictify(self)->Dict[str,Any]:
         output = OrderedDict()
         i:str #attr name
         for i in ["data", "index",]:
             output[i] = getattr(self, i)
-        output["previous_hash"] = unhexlifier.do_it(self.previous_hash)
-        output["pow"] = unhexlifier.do_it(self.pow)
+        output["previous_hash"] = hexlifier.do_it(self.previous_hash)
+        output["pow"] = hexlifier.do_it(self.pow)
+        print("[dictify]", output)
         return output
     
     def mash(self)->bytes:
