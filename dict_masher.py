@@ -5,11 +5,11 @@ from typing import *
 
 
 
-def mash(data:Dict[str,Any])->str:
+def mash(data:Dict[str,Any])->bytes:
     output:str = str()
     for k, v in data.items():
         output += str(v)
-    return output
+    return output.encode()
 
 
 

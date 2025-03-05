@@ -1,12 +1,4 @@
 
+note 0:
+    all of the hashes in program are is byte form 
 
-
-note:
-    all pows have str type
-    all pows are hexlified version of their byte version
-
-    raw_byte -> hexlifie -> decoded
-
-    all function with pow parameter take this kind of pow 
-    these functiosn include but not limited to:
-        .pow_validator
