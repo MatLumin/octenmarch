@@ -36,7 +36,6 @@ class Block:
             output[i] = getattr(self, i)
         output["previous_hash"] = hexlifier.do_it(self.previous_hash)
         output["pow"] = hexlifier.do_it(self.pow)
-        print("[dictify]", output)
         return output
     
     def mash(self)->bytes:
@@ -49,20 +48,24 @@ class Block:
         return n.encode()
     
     def hash_without_pow(self)->bytes:
-        n:Dict[str,Any] = self.dictify()
-        n.pop("pow")
-        to_be_hashed:bytes = str(n).encode()
         hasher = hashlib.sha256()
-        hasher.update(obj=to_be_hashed)
+        hasher.update(self.mash_without_pow())
         return hasher.digest()
     
     def hash(self)->bytes:
-        n:Dict[str,Any] = self.dictify()
-        to_be_hashed:bytes = str(n).encode()
         hasher = hashlib.sha256()
-        hasher.update(obj=to_be_hashed)
-        return hasher.digest()  
+        hasher.update(self.mash())
+        return hasher.digest()
     
+    
+    def hash_by_pow(self, pow:bytes)->bytes:
+        z:Dict[str,Any] = self.dictify()
+        z["pow"] = pow 
+        mashed:bytes = dict_masher.mash(data=z)
+        hasher = hashlib.sha256()
+        hasher.update(mashed)
+        return hasher.digest()
+
 
     def is_valid(self)->bool:
         hashed:bytes = self.hash()
