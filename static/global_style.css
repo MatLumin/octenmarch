@@ -1,0 +1,25 @@
+@keyframes crt_routine
+    {
+    0% {
+        text-shadow: rgb(129, 60, 0) 0px 0px 5px;
+    } 
+    50% {
+        text-shadow: rgb(244, 114, 0) 0px 0px 7px;
+    }
+    100%
+    {
+        text-shadow: rgb(134, 63, 0) 0px 0px 5px;
+    }
+    }
+
+* {
+    font-family: monospace;
+    color: rgb(241, 112, 0);
+    background-color: black;
+    font-size: medium;
+    animation-name:crt_routine;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    text-shadow: rgb(244, 114, 0) 0px 0px 7px; 
+}

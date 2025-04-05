@@ -1,0 +1,19 @@
+
+<link rel="stylesheet" href="/static/global_style.css">
+
+<pre>
+    ip = {{lookupnode.ip}}
+    port = {{lookupnode.port}}
+    name = {{lookupnode.name}}
+    type = {{lookupnode.type}}
+    {% for record in lookupnode.records %}
+        <pre>
+           ip {{record.ip}}
+           port {{record.port}}
+           name {{record.name}}
+           type {{record.type}}
+        </pre>
+    {% endfor %}
+</pre>
+
+
